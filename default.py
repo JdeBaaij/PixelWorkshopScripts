@@ -1,9 +1,6 @@
 import requests
 import json
 
-import requests
-import json
-
 # This is the URL of the server where we send the pixels.
 url = "http://localhost:5173/api/single"
 headers = {'Content-Type': 'application/json'}
