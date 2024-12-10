@@ -10,12 +10,12 @@ headers = {'Content-Type': 'application/json'}
 
 snake_colour = [0, 255, 0]
 black_color = [0, 0, 0]
-background_colour = [255, 255, 255]
+background_colour = [245, 245, 245]
 
 # This is a function.
 # We will use this function to send a pixel to the canvas.
 def sendPixel(pixel):
-    response = requests.post(url, headers=headers, data=json.dumps({**pixel, 'key': 'WHWKIKBI'}))
+    response = requests.post(url, headers=headers, data=json.dumps({**pixel, 'key': 'TCXHCIIP'}))
     print(response.content)
 
 
@@ -49,10 +49,11 @@ class LinkedList:
         return current
 
 class Snake:
-    def __init__(self, x, y, initial_direction = 'd'):
+    def __init__(self, x, y, initial_direction='d'):
         self.positions = LinkedList()
         self.positions.add_position(x, y)  # Initial position of the snake's head
         self.current_direction = initial_direction  # Default initial direction
+        self.length = 1  # Initial length of the snake
 
     def move(self):
         head = self.positions.head
@@ -67,10 +68,16 @@ class Snake:
         else:
             return  # Invalid direction, do nothing
 
+        # Check for self-intersection
+        if self.check_self_intersection(new_x, new_y):
+            print("Game Over: Snake intersected with itself.")
+            sys.exit()
+
         # Add new head position
         self.positions.add_position(new_x, new_y)
-        # Remove the tail (for simplicity, assuming snake length is constant)
-        self.remove_tail()
+        # Remove the tail only if the snake's length is exceeded
+        if self.length < self.get_length():
+            self.remove_tail()
 
     def remove_tail(self):
         current = self.positions.head
@@ -85,17 +92,42 @@ class Snake:
 
     def print_snake(self):
         self.positions.print_list()
+    
+    def check_self_intersection(self, x, y):
+        current = self.positions.head.next  # Start checking from the second node
+        while current:
+            if current.x == x and current.y == y:
+                return True
+            current = current.next
+        return False
+
+    def get_length(self):
+        current = self.positions.head
+        count = 0
+        while current:
+            count += 1
+            current = current.next
+        return count
 
 def read_input(snake):
-    for direction in sys.stdin:
-        direction = direction.strip()
+    while True:
+        direction = sys.stdin.read(1).strip()
         if direction in ['w', 'a', 's', 'd']:
             snake.current_direction = direction
 
-#snake starting positions
+# Initialize the snake with a single position
 snake = Snake(1, 196, 'd')
-snake.add_position(0, 196)
 
+# Function to increase snake length every second
+def increase_length(snake):
+    while True:
+        time.sleep(1)
+        snake.length += 1
+
+# Start a thread to increase snake length
+length_thread = threading.Thread(target=increase_length, args=(snake,))
+length_thread.daemon = True
+length_thread.start()
 
 # Start a thread to read input
 input_thread = threading.Thread(target=read_input, args=(snake,))
