@@ -3,21 +3,11 @@ import json
 import sys
 import time
 import threading
-
-# This is the URL of the server where we send the pixels.
-url = "https://pixelcorp.nl/api/single"
-headers = {'Content-Type': 'application/json'}
+from defaultPixel import sendPixel
 
 snake_colour = [0, 255, 0]
 black_color = [0, 0, 0]
 background_colour = [245, 245, 245]
-
-# This is a function.
-# We will use this function to send a pixel to the canvas.
-def sendPixel(pixel):
-    response = requests.post(url, headers=headers, data=json.dumps({**pixel, 'key': 'TCXHCIIP'}))
-    print(response.content)
-
 
 class Node:
     def __init__(self, x, y):

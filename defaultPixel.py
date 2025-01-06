@@ -1,14 +1,11 @@
 import requests
 import json
-
-# This is the URL of the server where we send the pixels.
-url = "http://localhost:5173/api/single"
-headers = {'Content-Type': 'application/json'}
+from config import URL, KEY, HEADERS
 
 # This is a function.
 # We will use this function to send a pixel to the canvas.
 def sendPixel(pixel):
-    response = requests.post(url, headers=headers, data=json.dumps({**pixel, 'key': 'julius'}))
+    response = requests.post(URL, headers=HEADERS, data=json.dumps({**pixel, 'key': KEY}))
     print(response.content)
 
 # First, we will create a pixel.

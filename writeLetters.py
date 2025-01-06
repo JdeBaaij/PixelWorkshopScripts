@@ -1,18 +1,14 @@
 import requests
 import json
-import os
 
 
-from dotenv import load_dotenv
-load_dotenv()
+from defaultPixel import sendPixel
 
 # defaults
-url = os.getenv('DOMAIN')
-headers = {'Content-Type': 'application/json'}
 color = [0, 0, 0]
 Start = {'x': 5, 'y': 5}
 xbegin = 5
-xend = 30
+xend = 180
 spacing = 1
 
 letter_bitmaps = {
@@ -304,13 +300,8 @@ letter_bitmaps = {
     ],
 }
 
-
-def sendPixel(pixel):
-    response = requests.post(url, headers=headers, data=json.dumps({**pixel, 'key': os.getenv('MASTER_KEY')}))
-    print(response.content)
-
 # Function to write a string to the canvas
-def write_string_to_canvas(string, start_x, start_y, spacing=3):
+def write_string_to_canvas(string, start_x, start_y, spacing):
     x, y = start_x, start_y
     yline = y
     for char in string:
@@ -337,4 +328,4 @@ def write_string_to_canvas(string, start_x, start_y, spacing=3):
         else:
             print(f"Character '{char}' not in bitmap.")
 # Example usage
-write_string_to_canvas("text", Start['x'], Start['y'], spacing)
+write_string_to_canvas("HALLO GROEP", Start['x'], Start['y'], spacing)
