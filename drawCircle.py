@@ -67,12 +67,13 @@ By iterating through these angles, the function calculates the perimeter of the 
 """
 
 def drawCircleFill(color: List[int], startx: int, starty: int, radius: int) -> None:
+    
     # check if its in bounds
     if not (0 <= startx - radius < 200 and 0 <= startx + radius < 200 and
             0 <= starty - radius < 200 and 0 <= starty + radius < 200):
         raise ValueError("Circle exceeds canvas bounds.")
     # call drawCircle from the Maths library
-    for rad in range(radius, -1, 0):
+    for rad in range(radius, 0, -1):
         drawCircle(color, startx, starty, rad)
     # write surrounding pixel of 1 since they are inefficient to calc with math library
     surrounding_pixels = [
