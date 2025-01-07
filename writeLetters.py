@@ -311,7 +311,7 @@ letter_bitmaps = {
 }
 
 # Function to write a string to the canvas
-def write_string_to_canvas(coloor, string, start_x, start_y, spacing):
+def write_string_to_canvas(color, string, start_x, start_y, spacing):
     x, y = start_x, start_y
     yline = y
     for char in string:
