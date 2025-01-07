@@ -117,3 +117,23 @@ def drawFilledSquare(color: List[int], startx: int, starty: int, side_length: in
     # Draw horizontal lines to fill the square
     for y in range(starty, starty + side_length):
         drawLine(color, startx, y, 'r', side_length)
+        
+def drawCross(color: List[int], x: int, y: int, radius: int) -> None:
+    """
+    Draws a cross on a canvas centered at a specified point.
+
+    Parameters:
+    - color (list): A list representing the RGB color of the cross, formatted as [R, G, B].
+    - x (int): The x-coordinate of the center of the cross.
+    - y (int): The y-coordinate of the center of the cross.
+    - radius (int): The length of each arm of the cross.
+    """
+    # Check if the cross would go out of bounds
+    if not (0 <= x - radius < 200 and 0 <= x + radius < 200 and
+            0 <= y - radius < 200 and 0 <= y + radius < 200):
+        raise ValueError("Cross would go out of bounds.")
+
+    # Draw the vertical line of the cross
+    drawLine(color, x, y - radius, 'd', 2 * radius + 1)
+    # Draw the horizontal line of the cross
+    drawLine(color, x - radius, y, 'r', 2 * radius + 1)
