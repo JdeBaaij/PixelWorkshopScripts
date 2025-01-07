@@ -13,7 +13,7 @@ def sendPixel(pixel):
 #    x: the x coordinate where we want to place the pixel.
 #    y: the y coordinate where we want to place the pixel.
 #    color: the color the pixel should be in RGB.
-pixel = {'x': 86, 'y': 25, 'color': [255, 0, 0]}
+# pixel = {'x': 86, 'y': 25, 'color': [255, 0, 0]}
 
-# By passing this pixel variable to the sendPixel function, it will be sent to the server.
-sendPixel(pixel)
+# # By passing this pixel variable to the sendPixel function, it will be sent to the server.
+# sendPixel(pixel)
