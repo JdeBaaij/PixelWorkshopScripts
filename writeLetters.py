@@ -5,7 +5,6 @@ import json
 from defaultPixel import sendPixel
 
 # defaults
-color = [0, 0, 0]
 Start = {'x': 5, 'y': 5}
 xbegin = 5
 xend = 180
@@ -298,13 +297,30 @@ letter_bitmaps = {
         "000000000",
         "000000000"
     ],
+    ' ': [
+        "000000000",
+        "000000000",
+        "000000000",
+        "000000000",
+        "000000000",
+        "000000000",
+        "000000000",
+        "000000000",
+        "000000000"
+    ],     
 }
 
 # Function to write a string to the canvas
-def write_string_to_canvas(string, start_x, start_y, spacing):
+def write_string_to_canvas(coloor, string, start_x, start_y, spacing):
     x, y = start_x, start_y
     yline = y
     for char in string:
+        #check for newline
+        if char == '\n':
+            x = xbegin
+            yline += 9 + spacing  # Move to the next line
+            y = yline  # Reset y to the new line start
+            continue
         # Convert lowercase to uppercase
         char = char.upper()
         if char in letter_bitmaps:

@@ -3,7 +3,8 @@ from drawCircle import drawCircle, drawCircleFill
 from writeLetters import write_string_to_canvas
 
 #write text
-write_string_to_canvas('welkom bij de codam pixelcorp workshop', 5, 5, 3)
+color = [0, 0, 0]
+write_string_to_canvas(color, 'welkom  bij de\ncodam\npixelcorp\nworkshop', 5, 5, 3)
 
 
 #draw panda
