@@ -327,5 +327,3 @@ def write_string_to_canvas(string, start_x, start_y, spacing):
                 y = yline  # Reset y to the new line start
         else:
             print(f"Character '{char}' not in bitmap.")
-# Example usage
-write_string_to_canvas("HALLO GROEP", Start['x'], Start['y'], spacing)
